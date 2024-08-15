@@ -30,37 +30,6 @@ jobs:
         run: npm install --global vercel@latest
  
       - name: Pull Vercel Enviroment Information
-        run: vercel pull --yes --environment=development --token=${{ secrets.env:
-  VERCEL_ORG_ID: ${{secrets.DOEFA2}}
-  VERCEL_PROJECT_ID: ${{ secrets.DOEFA3}}
- 
-on:
-  push:
-    branches:
-      - main
-jobs:
-  Deploy-development:
-    runs-on: ubuntu-latest
- 
-    steps:
-      - name: "checkout code"
-        uses: actions/checkout@v4
-      - name: Install Node.js
-        uses: actions/setup-node@v4
- 
-      - name: Install npm
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          registry-url: 'https://registry.npmjs.org/'
- 
-      - name: Install dependencies
-        run: npm install
- 
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
- 
-      - name: Pull Vercel Enviroment Information
         run: vercel pull --yes --environment=development --token=${{ secrets.VERCEL_TOKEN }}
  
       - name: Build Project Artifacts
