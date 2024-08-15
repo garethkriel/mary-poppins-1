@@ -63,7 +63,7 @@ jobs:
       - name: Pull Vercel Enviroment Information
         run: vercel pull --yes --environment=development --token=${{ secrets.VERCEL_TOKEN }}
  
-      - name: BuildProject Artifacts
+      - name: Build Project Artifacts
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
  
       - name: Deploy Project Artifacts to Vercel
