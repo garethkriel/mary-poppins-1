@@ -1,8 +1,8 @@
 name: mary poppins
 env:
   VERCEL_ORG_ID: ${{secrets.VERCEL_ORG_ID}}
-  VERCEL_PROJECT_ID: ${{secrets.VERCEL_PROJECT_ID}}
-
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID}}
+ 
 on:
   push:
     branches:
@@ -10,36 +10,67 @@ on:
 jobs:
   Deploy-development:
     runs-on: ubuntu-latest
-
+ 
     steps:
       - name: "checkout code"
         uses: actions/checkout@v4
       - name: Install Node.js
         uses: actions/setup-node@v4
-
+ 
       - name: Install npm
         uses: actions/setup-node@v4
-        with: 
+        with:
           node-version: '20'
-          registry-url: 'https://regisrty.npmjs.org/'
-
-      - name: Install dependancies
+          registry-url: 'https://registry.npmjs.org/'
+ 
+      - name: Install dependencies
         run: npm install
-
+ 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
-
-
+ 
       - name: Pull Vercel Enviroment Information
-        run: vercel pull --yes --enviroment=development --token= ${{ secrets.VERCEL_TOKEN }}
-
-      - name: Build Project Artifacts
+        run: vercel pull --yes --environment=development --token=${{ secrets.env:
+  VERCEL_ORG_ID: ${{secrets.DOEFA2}}
+  VERCEL_PROJECT_ID: ${{ secrets.DOEFA3}}
+ 
+on:
+  push:
+    branches:
+      - main
+jobs:
+  Deploy-development:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: "checkout code"
+        uses: actions/checkout@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+ 
+      - name: Install npm
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org/'
+ 
+      - name: Install dependencies
+        run: npm install
+ 
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+ 
+      - name: Pull Vercel Enviroment Information
+        run: vercel pull --yes --environment=development --token=${{ secrets.VERCEL_TOKEN }}
+ 
+      - name: BuildProject Artifacts
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-
-      - name: Deploy Projects Artifacts to Vercel
+ 
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }} }}
+ 
+      - name: BuildProject Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+ 
+      - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
-
-      
-       
-      
-      
